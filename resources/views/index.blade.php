@@ -23,10 +23,10 @@
         </head>
         <body>
         <a href="{{route('add_text')}}">Yazı Ekle</a>
-        @foreach($veri as $item)
+        @foreach($topics as $item)
         <article class="flex flex-col shadow my-4">
             <a  class="hover:opacity-75">
-                <img width="100" height="100" src="{{ asset('' . Str::afterLast($item->image, 'public/')) }}">
+                <img width="100" height="100" src="{{$item['image']}}">
             </a>
             <div class="bg-white flex flex-col justify-start p-6">
                 <a href="#" class="text-blue-700 text-sm font-bold uppercase pb-4">{{$item['topic']}}</a>

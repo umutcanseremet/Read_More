@@ -4,13 +4,21 @@ namespace App\Http\Controllers;
 use App\Models\Veriler;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use PhpParser\Node\Expr\Array_;
 
 class MainController extends Controller
 {
     public function index(){
-        $veri=Veriler::all();
-
-        return view('index',compact('veri'));
+        $topics=Veriler::all();
+        foreach ($topics as $item)
+        $data[]=array(
+            'id'=>$item->id,
+            'slug'=>$item->slug,
+            'topic'=>$item->topic,
+            'writer' => Str::words($item->writer, 30, '...'),
+            'image' => asset($item->image),
+        );
+        return view('index', ['topics' => $data]);
     }
     public  function show($id,$slug){
         $deneme = Veriler::findOrFail($id);
